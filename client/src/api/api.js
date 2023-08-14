@@ -15,7 +15,7 @@ const config = {
     Authorization: `Bearer ${accessToken}`,
   },
 };
-const baseURL = process.env.REACT_APP_API_BASE_URL;
+const baseURL = "https://green-nursery-server.onrender.com/api";
 
 const fetchData = async (paramUrl) => {
   let apiUrl = baseURL;
