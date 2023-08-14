@@ -16,12 +16,15 @@ export default function OrderInfo() {
   const dispatch = useDispatch();
   const orderState = useSelector(Order);
   const orderInfo = orderState?.orderInfo;
+  const [activeField, setActiveField] = useState("");
 
   const handleOrderInfo = (e, field) => {
     const value = e.target.value;
     dispatch(
       orderSlice.actions.saveOrderInfo({ ...orderInfo, [field]: value })
     );
+    console.log(field, "[FIELD]");
+    dispatch(orderSlice.actions.updateActiveIndex(field));
   };
 
   const handleDateChange = (date) => {
@@ -58,7 +61,10 @@ export default function OrderInfo() {
         </Grid>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            key="plant_price"
             required
+            autoFocus={orderState.activeIndex === "price"}
+            omMouseEnter={() => setActiveField("price")}
             label="Price"
             value={orderInfo?.price}
             type="number"
@@ -69,6 +75,7 @@ export default function OrderInfo() {
         <Grid item xs={6} md={4} lg={3}>
           <TextField
             required
+            autoFocus={orderState.activeIndex === "shippingPrice"}
             label="Shipping Price"
             type="number"
             value={orderInfo?.shippingPrice}
@@ -79,6 +86,7 @@ export default function OrderInfo() {
         <Grid item xs={6} md={4} lg={3}>
           <TextField
             required
+            autoFocus={orderState.activeIndex === "quantity"}
             label="Quantity"
             type="number"
             value={orderInfo?.quantity}

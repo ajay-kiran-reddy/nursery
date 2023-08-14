@@ -23,11 +23,11 @@ const StockChart = ({ data }) => {
       align: "left",
     },
     tooltip: {
-      pointFormat: "{series.name}: <b>{point.y}%</b>",
+      pointFormat: "{series.name}: <b>{point.y}</b>",
     },
     accessibility: {
       point: {
-        valueSuffix: "%",
+        valueSuffix: "",
       },
     },
     plotOptions: {
@@ -36,7 +36,7 @@ const StockChart = ({ data }) => {
         cursor: "pointer",
         dataLabels: {
           enabled: true,
-          format: "<b>{point.name}</b>: {point.y} %",
+          format: "<b>{point.name}</b>: {point.y} ",
         },
       },
     },

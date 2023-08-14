@@ -200,7 +200,7 @@ export default function OrderLandingPage() {
   const orderState = useSelector(Order);
   const [openDialog, setOpenDialog] = React.useState(false);
   const dispatch = useDispatch();
-  const [showChart, setShowChart] = React.useState(false);
+  const [showChart, setShowChart] = React.useState(true);
 
   const handleDialog = (value) => {
     setOpenDialog(value);

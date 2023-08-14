@@ -18,6 +18,7 @@ const initialState = {
     severity: "",
     visible: false,
   },
+  activeIndex: "",
 };
 
 const orderSlice = createSlice({
@@ -72,6 +73,9 @@ const orderSlice = createSlice({
     },
     updateApiResponse: (state, action) => {
       state.apiResponse = action.payload;
+    },
+    updateActiveIndex: (state, action) => {
+      state.activeIndex = action.payload;
     },
     resetOrderData: (state, action) => {
       state.orderInfo = {};

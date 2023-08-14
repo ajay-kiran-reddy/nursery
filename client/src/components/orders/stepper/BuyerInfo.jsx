@@ -13,6 +13,7 @@ export default function BuyerInfo() {
     dispatch(
       orderSlice.actions.saveBuyerInfo({ ...buyerInfo, [field]: value })
     );
+    dispatch(orderSlice.actions.updateActiveIndex(field));
   };
 
   return (
@@ -20,6 +21,7 @@ export default function BuyerInfo() {
       <Grid container spacing={3}>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            autoFocus={orderState.activeIndex === "name"}
             label="Buyer Name"
             value={buyerInfo?.name}
             onChange={(e) => handleBuyerInfo(e, "name")}
@@ -28,6 +30,7 @@ export default function BuyerInfo() {
         </Grid>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            autoFocus={orderState.activeIndex === "phoneNumber"}
             label="Phone Number"
             style={{ width: "100%" }}
             type="number"
@@ -37,6 +40,7 @@ export default function BuyerInfo() {
         </Grid>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            autoFocus={orderState.activeIndex === "address"}
             onChange={(e) => handleBuyerInfo(e, "address")}
             label="Address"
             value={buyerInfo?.address}
@@ -45,6 +49,7 @@ export default function BuyerInfo() {
         </Grid>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            autoFocus={orderState.activeIndex === "city"}
             onChange={(e) => handleBuyerInfo(e, "city")}
             label="City Name"
             value={buyerInfo?.city}
@@ -53,6 +58,7 @@ export default function BuyerInfo() {
         </Grid>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            autoFocus={orderState.activeIndex === "state"}
             onChange={(e) => handleBuyerInfo(e, "state")}
             label="State Name"
             value={buyerInfo?.state}
@@ -61,6 +67,7 @@ export default function BuyerInfo() {
         </Grid>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            autoFocus={orderState.activeIndex === "country"}
             onChange={(e) => handleBuyerInfo(e, "country")}
             label="Country"
             value={buyerInfo?.country}
@@ -69,6 +76,7 @@ export default function BuyerInfo() {
         </Grid>
         <Grid item xs={6} md={4} lg={3}>
           <TextField
+            autoFocus={orderState.activeIndex === "pinCode"}
             onChange={(e) => handleBuyerInfo(e, "pinCode")}
             label="Pin Code"
             type="number"

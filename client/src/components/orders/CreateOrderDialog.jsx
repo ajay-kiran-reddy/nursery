@@ -12,10 +12,10 @@ import { Order, orderSlice } from "./slices/slice";
 export default function CreateOrderDialog({ open, handleDialog }) {
   const dispatch = useDispatch();
   const orderState = useSelector(Order);
-
+  const { orderInfo, buyerInfo } = orderState;
+  const [disabledCreate, setDisableCreate] = React.useState(true);
+  const isEditMode = orderState.orderInfo?.isEdit;
   const handleCreateOrder = () => {
-    const { orderInfo, buyerInfo } = orderState;
-
     const {
       quantity,
       plant,
@@ -54,8 +54,6 @@ export default function CreateOrderDialog({ open, handleDialog }) {
       _id,
     };
 
-    const isEditMode = orderState.orderInfo?.isEdit;
-
     dispatch(
       isEditMode
         ? orderSlice.actions.updateOrder(requestBody)
@@ -67,6 +65,42 @@ export default function CreateOrderDialog({ open, handleDialog }) {
   const handleClose = () => {
     handleDialog(false);
   };
+
+  React.useEffect(() => {
+    const {
+      quantity,
+      plant,
+      price,
+      shippingPrice,
+      paymentMethod,
+      paymentDone,
+      _id,
+    } = orderInfo;
+
+    const { name, address, city, country, phoneNumber, state, pinCode } =
+      buyerInfo;
+    if (isEditMode) {
+      setDisableCreate(false);
+    } else {
+      setDisableCreate(
+        !(
+          quantity &&
+          plant &&
+          price &&
+          shippingPrice &&
+          paymentMethod &&
+          paymentDone &&
+          name &&
+          address &&
+          city &&
+          country &&
+          phoneNumber &&
+          state &&
+          pinCode
+        )
+      );
+    }
+  }, [orderInfo, buyerInfo]);
 
   return (
     <div>
@@ -91,6 +125,7 @@ export default function CreateOrderDialog({ open, handleDialog }) {
             onClick={handleCreateOrder}
             variant="contained"
             color="primary"
+            disabled={disabledCreate}
           >
             Create
           </Button>
